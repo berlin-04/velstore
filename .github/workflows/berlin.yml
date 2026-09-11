@@ -36,7 +36,7 @@ jobs:
           docker run --rm velstore sh -c "cp .env.example .env && php artisan key:generate && composer install --no-interaction && php artisan test"
 
   scan:
-    needs: test
+    needs: 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
