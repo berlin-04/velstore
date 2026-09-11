@@ -33,7 +33,10 @@ jobs:
         run: docker load -i image.tar
 
       - name: Tests Laravel
-        run: docker run --rm velstore sh -c "composer install --no-interaction && php artisan test"
+        run: |
+          docker run --rm \
+            -v $(pwd)/.env.example:/var/www/html/.env \
+            velstore sh -c "php artisan key:generate && composer install --no-interaction && php artisan test"
 
   scan:
     needs: test
